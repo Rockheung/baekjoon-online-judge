@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1309
+
+
 def f(n, all = (1,1,1)):
     if n <1 or n >100000:
         return -1

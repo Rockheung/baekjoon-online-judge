@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/11721
+
+
 def ans(str):
     for i, char in enumerate(list(str)):
         print(char, end='')

@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1193
+
+
 def d(n):
     return int(n*(n+1)/2)
 

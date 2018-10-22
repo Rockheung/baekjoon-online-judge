@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/5622
+
+
 def charToNum(char):
     if ord(char) in range(ord('A'),ord('D')):
         return 2+1

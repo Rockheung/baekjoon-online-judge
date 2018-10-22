@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2292
+
+
 def d(n):
     if n == 1: return 1
     return (n-1) * 6

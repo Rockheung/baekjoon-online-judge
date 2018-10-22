@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/4673
+
+
 def d(n):
     origin_n = n
     while ( n >0 ):

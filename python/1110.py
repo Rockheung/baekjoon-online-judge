@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1110
+
+
 i = 0
 n = int(input())
 tmp = n

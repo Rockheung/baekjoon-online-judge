@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1546
+
+
 lec_num = int(input())
 score_list = list(map(int,input().split()))
 max_score = max(score_list)

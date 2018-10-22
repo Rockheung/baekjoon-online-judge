@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/9020
+
+
 def primes(n=10000):
     # Each index of elements used as integer, 0:False, 1:False
     prime_table = [False,False] + [True] * (n-1)

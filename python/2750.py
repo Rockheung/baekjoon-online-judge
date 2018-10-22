@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/2750
+
 from sys import stdin, stdout
 
 ns = []

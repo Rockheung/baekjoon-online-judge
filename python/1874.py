@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/1874
+
 from sys import stdin
 
 n, *l = [int(s.rstrip()) for s in stdin.readlines()]

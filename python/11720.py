@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/11720
+
+
 def ans(str_n):
     from functools import reduce
     return reduce(lambda x,y: x+y,map(int,list(str_n)))

@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/4344
+
+
 def ans(str_read):
     classes = int(str_read[0])
     for line in str_read[1:]:

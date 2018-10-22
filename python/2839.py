@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2839
+
+
 def ans(n):
     if n >= 3 and n <= 5000:
         when5 = n//5

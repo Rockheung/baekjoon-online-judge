@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/1181
+
 from sys import stdin
 
 l = []

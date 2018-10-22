@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2577
+
+
 result = list(str(int(input()) * int(input()) * int(input())))
 
 result.sort()

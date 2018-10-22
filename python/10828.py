@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/10828
+
+
 def stack_basic(cmd, val=None, l=[]):
     # cmd : (one of [push,pop,size,empty,top], int)
     if cmd == 'push':

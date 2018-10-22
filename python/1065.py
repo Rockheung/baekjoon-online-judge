@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1065
+
+
 def isHansoo(n):
     while ( True ):
         gap = n //10 %10 - n %10

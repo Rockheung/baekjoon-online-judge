@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2920
+
+
 def ans(s):
     d = s[-1] - s[-2]
     for i in range(7):

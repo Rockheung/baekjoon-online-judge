@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/10250
+
 for i in range(int(input())):
     h,w,n = tuple(map(int,input().split()))
     print('{}{:02d}'.format( (n-1)%h +1, (n-1)//h +1 ))
