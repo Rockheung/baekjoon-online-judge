@@ -3,7 +3,7 @@ import os
 def add_comment(source):
     with open(source, 'r') as f:
         lines = f.readlines()
-        problem_no, ext = os.path.splitext(os.paht.basename(source))
+        problem_no, ext = os.path.splitext(os.path.basename(source))
         if ext == '.py':
             lines.insert(0,'\n')
             lines.insert(0,'# Problem: https://www.acmicpc.net/problem/{}\n'.format(problem_no))
@@ -21,6 +21,6 @@ if __name__ == '__main__':
     # remove original files
     [os.remove(os.path.join('python',s)) for s in os.listdir('python') if not '_' in s]
     # remove underbar in each file's name
-    [os.rename(s, s[:-4]+'.py', src_dir_fd='python', dst_dir_fd='python') for s in os.listdir('python')]
+    [os.rename('python/' + s, 'python/' + s[:-4]+'.py') for s in os.listdir('python')]
 
 
