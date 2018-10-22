@@ -1,57 +1,25 @@
 
 # Problem: https://www.acmicpc.net/problem/2504
 
-
-def cal(ps):
-    ps = list(ps)
-    buf = []
-    res, buf_val = 0, []
-    recent_closed, recent_opend = True, True
-    while (True):
-        try:
-            s = ps.pop()
-            if s == ')':
-                if recent_closed:
-                    buf_val.append(1)
-                    recent_closed = False
-                buf.append(s)
-                recent_opend = True
-            elif s == ']':
-                if recent_closed:
-                    buf_val.append(1)
-                    recent_closed = False
-                buf.append(s)
-                recent_opend = True
-            elif s == '(' and not buf[-1] == ']' :
-                if recent_opend:
-                    buf_val = [sum(buf_val) * 2]
-                    recent_opend = False
-                else :
-                    buf_val[-1] *= 2
-                recent_closed = True
-                buf.pop()
-            elif s == '[' and not buf[-1] == ')' :
-                if recent_opend:
-                    buf_val = [sum(buf_val) * 3]
-                    recent_opend = False
-                else :
-                    buf_val[-1] *= 3
-                buf_val = [sum(buf_val) * 3]
-                recent_closed = True
-                buf.pop()
-            else:
-                res = 0
-                raise IndexError
-
-            if len(buf) == 0:
-                res, buf_val = res + sum(buf_val), []
-            print('{}, {}: {}, {}'.format(ps,buf[::-1],buf_val,res))
-        except IndexError:
-            break
-
-    return res
+def cal_unit(ps,
+             buf=0):
+    try:
+        s = ps.pop()
+        while(ps[-1] == ')' or ps[-1] == ']'):
+            ps, buf_tmp = cal_unit(ps)
+            buf += buf_tmp
+        buf = 1 if buf == 0 else buf
+        if ps[-1] == '(' and s == ')':
+            ps.pop()
+            return ps, buf*2
+        elif ps[-1] == '[' and s == ']':
+            ps.pop()
+            return ps, buf*3
+        raise IndexError
+    except IndexError:
+        return ps,0
 
 
 if __name__ == '__main__':
-    from sys import stdin
-    print(cal(stdin.readline().rstrip()))
+    ps, val = cal_unit(list(input().join(['[',']'])))
+    print(val//3 if len(ps) == 0 else 0)
