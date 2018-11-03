@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/10989
+
+
 def sorting(n, ns={}):
     try:
         ns[n] +=1

@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2675
+
+
 def ans(n,s):
     repeated_string = ''
     for char in s:

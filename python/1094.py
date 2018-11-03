@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1094
+
+
 def f(x):
     st_len = [64]
 

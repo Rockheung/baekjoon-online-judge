@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1316
+
+
 def ans(s):
 
     for i in range(len(s)):

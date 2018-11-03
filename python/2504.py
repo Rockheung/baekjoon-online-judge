@@ -1,4 +1,6 @@
 
+# Problem: https://www.acmicpc.net/problem/2504
+
 def cal_unit(ps,
              buf=0):
     try:

@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/1157
+
+
 def ans(s):
     char_count = dict()
     for char in s:

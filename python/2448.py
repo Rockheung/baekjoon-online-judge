@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/2448
+
 from sys import stdout
 
 def triStar(n):

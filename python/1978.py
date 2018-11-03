@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/1978
+
 from sys import stdin
 
 ns = [int(n) for n in stdin.read().split('\n')[1].split() if n is not '']

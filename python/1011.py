@@ -1,3 +1,6 @@
+
+# Problem: https://www.acmicpc.net/problem/1011
+
 def d(n):
     # maximum distance with n space jumping
     dis = (n//2)*((n//2)+1)

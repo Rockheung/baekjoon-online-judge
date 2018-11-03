@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/2775
+
+
 def d(a,b,
       people = [[0]*15 for i in range(15)]):
     if a == 0 or b == 1:

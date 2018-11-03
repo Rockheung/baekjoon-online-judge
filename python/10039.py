@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/10039
+
+
 avg = 0
 for i in range(5):
     a = int(input())

@@ -1,4 +1,7 @@
 
+# Problem: https://www.acmicpc.net/problem/6064
+
+
 def ext_euclidean(x, y):
     r = (x, y)
     s = (1, 0)
