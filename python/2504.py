@@ -3,11 +3,11 @@ def cal_unit(ps,
              buf=0):
     try:
         s = ps.pop()
-        while(ps[-1] == ')' or ps[-1] == ']'):
+        while(ps[-1] in [')',']']):
             ps, buf_tmp = cal_unit(ps)
             buf += buf_tmp
         buf = 1 if buf == 0 else buf
-        if ps[-1] == '(' and s == ')':
+        if (ps[-1],s) == ('(',')'):
             ps.pop()
             return ps, buf*2
         elif ps[-1] == '[' and s == ']':
