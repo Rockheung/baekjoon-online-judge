@@ -14,8 +14,9 @@ def _1561(n, m, m_t):
     children = time_child(n,m,m_t)
     time, child = next(children)
     for i in range(n):
-        last_idx = buf.index(min(buf))
-        buf[last_idx] += m_t[last_idx]
+        # last_idx = buf.index(min(buf))
+        # buf[last_idx] += m_t[last_idx]
+        buf = [time - time%x for j, x in enumerate(m_t)]
         if (i+1 > child):
             time, child = next(children)
         print('{:2d} @ {:2d} mins, {}'.format(i+1,time,buf))
@@ -37,11 +38,13 @@ def _1561_binary_search(n, m, m_t):
             break
 
 
+    # min_ref_time <= ref_time, same or less
     min_ref_time = ref_time - min([ref_time%x for x in m_t])
+    # can not be 0
     gap_children = n - sum([(min_ref_time-1)//x for x in m_t])
     pre_step_idx = [i+1 for i, x in enumerate([(min_ref_time-1)%x for x in m_t]) if m_t[i] - 1 == x]
-    print(pre_step_idx, min_ref_time)
-    return pre_step_idx[gap_children-1] if gap_children > 0 else pre_step_idx[0]
+    print(ref_time, min_ref_time, gap_children, pre_step_idx)
+    return pre_step_idx[gap_children-1] # if gap_children > 0 else pre_step_idx[0]
 
 
 def test(n, m, m_t):
