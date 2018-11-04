@@ -3,8 +3,10 @@ def time_child(n,m,m_t):
     time = child = 0
     while(n >= child):
         time += 1
-        child = sum([time//mt for mt in m_t])
-        yield time, child
+        each_play = [time//mt for mt in m_t]
+        left_time = [time%mt for mt in m_t]
+        child = sum(each_play)
+        yield time, child, each_play, left_time
 
 
 # N: Children, M: Number of cars, M_T: time per car
@@ -12,12 +14,12 @@ def _1561(n, m, m_t):
     buf = [ 0 for _ in range(m) ]
     child = last_idx = 0
     children = time_child(n,m,m_t)
-    time, child = next(children)
+    time, child = next(children)[:2]
     for i in range(n):
         # last_idx = buf.index(min(buf))
         # buf[last_idx] += m_t[last_idx]
         buf = [time - time%x for j, x in enumerate(m_t)]
-        if (i+1 > child):
+        if (i+1 < child):
             time, child = next(children)
         print('{:2d} @ {:2d} mins, {}'.format(i+1,time,buf))
     return last_idx + 1
@@ -36,8 +38,6 @@ def _1561_binary_search(n, m, m_t):
             lower = ref_time +1
         else :
             break
-
-
     # min_ref_time <= ref_time, same or less
     min_ref_time = ref_time - min([ref_time%x for x in m_t])
     # can not be 0
@@ -62,11 +62,14 @@ if __name__ == '__main__':
     #     play_time = [int(x) for x in list(input().split())]
     #     print(ans(n,m,play_time))
 
+
     n,m = map(int, tuple(input().split()))
     play_time = [int(x) for x in input().split()]
     # test(n,m,play_time)
     # print(ans_1561_reversed(n,m,play_time))
-    print('the answer: ',_1561(n,m,play_time))
+    for t,c,ec,lt in time_child(n,m,play_time):
+        print('time: ', t, '\tchild: ', c, '\teach play: ', ec, '\tleft time: ', lt)
+    # print('the answer: ',_1561(n,m,play_time))
 
     # n,m = map(int, tuple(input().split()))
     # play_time = [int(x) for x in input().split()]
