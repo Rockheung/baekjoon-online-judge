@@ -22,12 +22,10 @@ def _1561(n, m, m_t):
     return last_idx + 1
 
 
-
-
-# 이상 미만으로 자르자.
 def _1561_binary_search(n, m, m_t):
     lower, upper = 0, n * max(m_t)
     while (upper > lower):
+        # even number => clearly half, odd number => bigger integer
         ref_time = (upper + lower)//2 if (upper + lower)%2 == 0 else (upper + lower)//2 + 1
         if ref_time == upper: break
         how_many_children = sum([ref_time//x for x in m_t])
@@ -39,7 +37,6 @@ def _1561_binary_search(n, m, m_t):
             break
 
 
-    # 이거면 igaworks 문제 해결
     min_ref_time = ref_time - min([ref_time%x for x in m_t])
     gap_children = n - sum([(min_ref_time-1)//x for x in m_t])
     pre_step_idx = [i+1 for i, x in enumerate([(min_ref_time-1)%x for x in m_t]) if m_t[i] - 1 == x]
