@@ -15,13 +15,16 @@ def time_(n, m, times):
 
 def sol0(n, m, times):
     cars = [0 for _ in range(m)]
-    idx, t = 0, 1
+    idx, t = 0, 0
     for i in range(n):
         cars[idx] += times[idx]
         pre_idx, idx = idx, cars.index(min(cars))
-        print(t, pre_idx, idx, cars)
-        if pre_idx >= idx : t += 1
-    return pre_idx+1, cars[pre_idx]
+        print(i+1, "children enterd.\t", cars)
+        if pre_idx >= idx :
+            t += 1
+            log = t, ('s' if t >1 else ''), sum((t//x + (1 if t%x > 0 else 0) for x in times))
+            print(">> Now {} min{} passed. Expect {}\n".format(*log))
+    return pre_idx+1, cars[pre_idx], max(cars)
 
 
 # N: Children, M: Number of cars, times: time per car
@@ -70,13 +73,25 @@ def sol3(n, m, times):
     while (upper > lower):
         ref_time = (upper + lower) //2
         if ref_time == lower: break
-        maximum_children = sum((ref_time//x for x in times))
-        if maximum_children > n:
+        # n is exact entered_number
+        escape_mark = None
+        entered_children = sum((ref_time//x + (1 if ref_time%x > 0 else 0) for x in times))
+        if entered_children > n:
+            # ref_time is going to lower when escape
+            escape_mark = True
             upper = ref_time
-        elif maximum_children < n:
+        elif entered_children < n:
+            # ref_time is going to upper when escape
+            escape_mark = False
             lower = ref_time + 1
         else:
-            exact_n = True
+            break
+    # escape_mark did not changed
+    if escape_mark == None:
+
+        pass
+
+
 
 
 
@@ -95,6 +110,6 @@ def test(n, m, times):
 if __name__ == '__main__':
     n,m = map(int, tuple(input().split()))
     times = [int(x) for x in input().split()]
-    for t,c,ec,lt in time_(n,m,times):
-        print('time: ', t, '\tchild: ', c, '\teach play: ', ec, '\tleft time: ', lt)
-    print('Last played car index: {0}, takes time: {1}'.format(*sol0(n,m,times)))
+    # for t,c,ec,lt in time_(n,m,times):
+    #     print('time: ', t, '\tchild: ', c, '\teach play: ', ec, '\tleft time: ', lt)
+    print('Last played car index: {0}, takes maximum time: {2}'.format(*sol0(n,m,times)))
