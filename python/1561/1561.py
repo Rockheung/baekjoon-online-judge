@@ -12,6 +12,13 @@ def time_(n, m, times):
         child = sum(each_play)
         yield t, child, each_play, left_time
 
+def sol(n,m,times):
+    idx, cars = 0, [0 for _ in range(m)]
+    for _ in range(n):
+        idx = cars.index(min(cars))
+        cars[idx] += times[idx]
+    return idx + 1
+
 
 def sol0(n, m, times):
     cars = [0 for _ in range(m)]
@@ -71,32 +78,28 @@ def sol2(n, m, times):
 def sol3(n, m, times):
     lower, upper = 0, n * max(times)
     while (upper > lower):
-        ref_time = (upper + lower) //2
+        ref_time = (upper + lower)//2
         if ref_time == lower: break
         # n is exact entered_number
         escape_mark = None
         entered_children = sum((ref_time//x + (1 if ref_time%x > 0 else 0) for x in times))
         if entered_children > n:
-            # ref_time is going to lower when escape
+            # ref_time is going to be lower when escape
             escape_mark = True
             upper = ref_time
         elif entered_children < n:
-            # ref_time is going to upper when escape
+            # ref_time is going to be upper when escape
             escape_mark = False
             lower = ref_time + 1
         else:
             break
     # escape_mark did not changed
     if escape_mark == None:
-
-        pass
-
-
-
-
-
-
-
+        last_one_list_reversed = reversed([(t if ref_time%t == 0 else ref_time%t) for t in times])
+        return m - last_one_list_reversed.index(min(last_one_list_reversed))
+    else:
+        if  escape_mark:
+            pass
 
 def test(n, m, times):
     t = nc = 0
@@ -108,8 +111,10 @@ def test(n, m, times):
 
 
 if __name__ == '__main__':
-    n,m = map(int, tuple(input().split()))
-    times = [int(x) for x in input().split()]
+    from sys import stdin
+    nm = [int(i) for i in stdin.readline().rstrip().split()]
+    times = [int(t) for t in stdin.readline().rstrip().split()]
     # for t,c,ec,lt in time_(n,m,times):
     #     print('time: ', t, '\tchild: ', c, '\teach play: ', ec, '\tleft time: ', lt)
-    print('Last played car index: {0}, takes maximum time: {2}'.format(*sol0(n,m,times)))
+    # print('Last played car index: {0}, takes maximum time: {2}'.format(*sol0(n,m,times)))
+    print(sol(*nm, times))
