@@ -84,8 +84,9 @@ def damn_right(n,m,ts):
     lo, hi = min(ts)*k, max(ts)*k
     md = (lo+hi)//2
     while lo < hi:
-        # 루프문을 빠지는 경우 무조건 True인 경우가 실행되고 나서다.
+        # 루프문에서 빠지는 경우 무조건 True인 경우가 실행되고 나서다.
         print(lo, hi, md, sum((md+t)//t for t in ts))
+        # sum((md+t)//t for t in ts) 는 바로 그 다음 꽉 채운 아이들 명수
         if sum((md+t)//t for t in ts) < n:
             lo = md+1
             md = (lo+hi)//2
