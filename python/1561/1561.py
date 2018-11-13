@@ -22,16 +22,17 @@ def sol(n,m,times):
 
 def sol0(n, m, times):
     cars = [0 for _ in range(m)]
-    idx, t = 0, 0
+    idx, t, idx_l = 0, 0, []
     for i in range(n):
         cars[idx] += times[idx]
         pre_idx, idx = idx, cars.index(min(cars))
+        idx_l.append(pre_idx+1)
         print(i+1, "children enterd.\t", cars)
         if pre_idx >= idx :
             t += 1
             log = t, ('s' if t >1 else ''), sum((t//x + (1 if t%x > 0 else 0) for x in times))
             print(">> Now {} min{} passed. Expect {}\n".format(*log))
-    return pre_idx+1, cars[pre_idx], max(cars)
+    return pre_idx+1, cars[pre_idx], max(cars), idx_l
 
 
 # N: Children, M: Number of cars, times: time per car
@@ -77,29 +78,30 @@ def sol2(n, m, times):
 
 def sol3(n, m, times):
     lower, upper = 0, n * max(times)
-    while (upper > lower):
+    entered_children_func = lambda p, ts: sum((p//t + (1 if p%t else 0) for t in ts))
+    while (True):
         ref_time = (upper + lower)//2
-        if ref_time == lower: break
-        # n is exact entered_number
-        escape_mark = None
-        entered_children = sum((ref_time//x + (1 if ref_time%x > 0 else 0) for x in times))
-        if entered_children > n:
-            # ref_time is going to be lower when escape
-            escape_mark = True
-            upper = ref_time
-        elif entered_children < n:
-            # ref_time is going to be upper when escape
-            escape_mark = False
+        d = n - entered_children_func(ref_time, times)
+        if not upper > lower:
+            while d > 0:
+                ref_time += 1
+                d = n - entered_children_func(ref_time, times)
+            break
+        if d < 0:
+            upper = ref_time - 1
+        elif d > 0:
             lower = ref_time + 1
         else:
             break
-    # escape_mark did not changed
-    if escape_mark == None:
-        last_one_list_reversed = reversed([(t if ref_time%t == 0 else ref_time%t) for t in times])
-        return m - last_one_list_reversed.index(min(last_one_list_reversed))
-    else:
-        if  escape_mark:
-            pass
+        print(lower, upper, ref_time, d)
+    last_one_list_reversed = [(ref_time%t if ref_time%t else t) for t in times[::-1]]
+    idx_map = {x:[] for x in set(last_one_list_reversed)}
+    for i, x in enumerate(last_one_list_reversed): idx_map[x].append(i)
+    sorted_idx = []
+    for _,j in sorted(idx_map.items()): sorted_idx.extend(j)
+    print('d: {}'.format(d), sorted_idx, last_one_list_reversed)
+    return m - sorted_idx[(-d if d < 0 else d)]
+
 
 def test(n, m, times):
     t = nc = 0
@@ -111,10 +113,7 @@ def test(n, m, times):
 
 
 if __name__ == '__main__':
-    from sys import stdin
-    nm = [int(i) for i in stdin.readline().rstrip().split()]
-    times = [int(t) for t in stdin.readline().rstrip().split()]
-    # for t,c,ec,lt in time_(n,m,times):
-    #     print('time: ', t, '\tchild: ', c, '\teach play: ', ec, '\tleft time: ', lt)
-    # print('Last played car index: {0}, takes maximum time: {2}'.format(*sol0(n,m,times)))
-    print(sol(*nm, times))
+    nm = [int(i) for i in input().split()]
+    times = [int(t) for t in input().split()]
+    print('Last played car index: {0}, takes maximum time: {2}, \n{3}'.format(*sol0(*nm,times)))
+    print(sol3(*nm, times))
