@@ -76,6 +76,7 @@ def sol2(n, m, times):
     return pre_step_idx[gap_children-1] # if gap_children > 0 else pre_step_idx[0]
 
 
+# shema7k's code on acmicpc.net
 def damn_right(n,m,ts):
     k = n//m if n%m else n//m - 1
     # 모든 놀이기구의 탑승 시간이 min(tx) 인 경우보다는 무조건 길거나 같고,
