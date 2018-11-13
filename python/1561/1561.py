@@ -55,7 +55,7 @@ def sol1(n, m, times):
 # this way works well, but else we should calculate every each step.
 # Good example: 22 children, 5 plays, 1,2,3,4,5 mins on each play.
 def sol2(n, m, times):
-    lower, upper = 0, n * max(times)
+    lower, upper = n * min(times), n * max(times)
     while (upper > lower):
         # even number => clearly half, odd number => bigger integer
         ref_time = (upper + lower)//2 if (upper + lower)%2 == 0 else (upper + lower)//2 + 1
